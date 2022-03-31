@@ -13,7 +13,7 @@ import filePath from "./filePath";
 
 // loading in some dummy items into the database
 // (comment out if desired, or change the number)
-addDummyDbItems(20);
+//addDummyDbItems(20);
 
 const app = express();
 
@@ -26,7 +26,10 @@ app.use(cors());
 dotenv.config();
 
 // use the environment variable PORT, or 4000 as a fallback
-const PORT_NUMBER = process.env.PORT ?? 4000;
+//const PORT_NUMBER = process.env.PORT ?? 4000;
+const baseUrl = process.env.NODE_ENV === "production"
+	? "your-project.herokuapp.com"
+	: "localhost:4000"
 
 // API info page
 app.get("/", (req, res) => {
@@ -79,6 +82,6 @@ app.patch<{ id: string }, {}, Partial<DbItem>>("/items/:id", (req, res) => {
   }
 });
 
-app.listen(PORT_NUMBER, () => {
-  console.log(`Server is listening on port ${PORT_NUMBER}!`);
+app.listen(baseUrl, () => {
+  console.log(`Server is listening on port ${baseUrl}!`);
 });
