@@ -2,7 +2,6 @@ import express from "express";
 import cors from "cors";
 import dotenv from "dotenv";
 import {
-  addDummyDbItems,
   addDbItem,
   getAllDbItems,
   getDbItemById,
@@ -27,9 +26,10 @@ dotenv.config();
 
 // use the environment variable PORT, or 4000 as a fallback
 //const PORT_NUMBER = process.env.PORT ?? 4000;
-const baseUrl = process.env.NODE_ENV === "production"
-	? "your-project.herokuapp.com"
-	: "localhost:4000"
+const baseUrl =
+  process.env.NODE_ENV === "production"
+    ? "your-project.herokuapp.com"
+    : "localhost:4000";
 
 // API info page
 app.get("/", (req, res) => {
