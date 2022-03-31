@@ -7,6 +7,7 @@ import {
   getDbItemById,
   DbItem,
   updateDbItemById,
+  todosInterface
 } from "./db";
 import filePath from "./filePath";
 
@@ -28,7 +29,7 @@ dotenv.config();
 //const PORT_NUMBER = process.env.PORT ?? 4000;
 const baseUrl =
   process.env.NODE_ENV === "production"
-    ? "your-project.herokuapp.com"
+    ? "https://todolistowen.herokuapp.com/"
     : "localhost:4000";
 
 // API info page
