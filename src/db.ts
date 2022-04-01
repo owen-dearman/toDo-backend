@@ -1,4 +1,3 @@
-
 export interface DbItem {
   title: string;
   details: string;

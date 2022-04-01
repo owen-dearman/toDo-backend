@@ -10,7 +10,7 @@ import {
   deleteDbItemById,
 } from "./db";
 import filePath from "./filePath";
-import { deepStrictEqual, match } from "assert";
+//import { deepStrictEqual, match } from "assert";
 
 // loading in some dummy items into the database
 // (comment out if desired, or change the number)
@@ -70,10 +70,10 @@ app.delete<{ id: string }>("/items/:id", (req, res) => {
   if (matchingSignature === "not found") {
     res.status(404).json(matchingSignature);
   } else {
-    if(deleteDbItemById(parseInt(req.params.id)) === "not found"){
-      res.sendStatus(404)
-    }else{
-    res.status(200).json(matchingSignature);
+    if (deleteDbItemById(parseInt(req.params.id)) === "not found") {
+      res.sendStatus(404);
+    } else {
+      res.status(200).json(matchingSignature);
     }
   }
 });
