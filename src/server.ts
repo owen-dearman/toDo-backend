@@ -7,9 +7,10 @@ import {
   getDbItemById,
   DbItem,
   updateDbItemById,
-  todosInterface
+  deleteDbItemById,
 } from "./db";
 import filePath from "./filePath";
+import { deepStrictEqual, match } from "assert";
 
 // loading in some dummy items into the database
 // (comment out if desired, or change the number)
@@ -26,11 +27,11 @@ app.use(cors());
 dotenv.config();
 
 // use the environment variable PORT, or 4000 as a fallback
-//const PORT_NUMBER = process.env.PORT ?? 4000;
-const baseUrl =
-  process.env.NODE_ENV === "production"
-    ? "https://todolistowen.herokuapp.com/"
-    : "localhost:4000";
+const PORT_NUMBER = process.env.PORT ?? 4000;
+// const baseUrl =
+//   process.env.NODE_ENV === "production"
+//     ? "https://todolistowen.herokuapp.com/"
+//     : "localhost:4000";
 
 // API info page
 app.get("/", (req, res) => {
@@ -69,7 +70,11 @@ app.delete<{ id: string }>("/items/:id", (req, res) => {
   if (matchingSignature === "not found") {
     res.status(404).json(matchingSignature);
   } else {
+    if(deleteDbItemById(parseInt(req.params.id)) === "not found"){
+      res.sendStatus(404)
+    }else{
     res.status(200).json(matchingSignature);
+    }
   }
 });
 
@@ -83,6 +88,6 @@ app.patch<{ id: string }, {}, Partial<DbItem>>("/items/:id", (req, res) => {
   }
 });
 
-app.listen(baseUrl, () => {
-  console.log(`Server is listening on port ${baseUrl}!`);
+app.listen(PORT_NUMBER, () => {
+  console.log(`Server is listening on port ${PORT_NUMBER}!`);
 });
